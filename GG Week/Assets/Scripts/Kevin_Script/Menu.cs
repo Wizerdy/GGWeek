@@ -12,31 +12,9 @@ public class Menu : MonoBehaviour
         SceneManager.LoadScene("MenueP", LoadSceneMode.Single);
     }
 
-    void LoadCredit()
+    void Quitter()
     {
-        Time.timeScale = 1;
-        SceneManager.LoadScene("Credit", LoadSceneMode.Single);
-    }
-
-    public void NextLevel()
-    {
-        if (SceneManager.sceneCountInBuildSettings != SceneManager.GetActiveScene().buildIndex)
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Single);
-            if (SceneManager.GetActiveScene().buildIndex != 0)
-                menuPauseUI.SetActive(false);
-            Time.timeScale = 1;
-        }
-        else
-        {
-            Debug.Log("You've reach the last level");
-            LoadCredit();
-        }
-    }
-
-    public int getLevelNum()
-    {
-        return (SceneManager.GetActiveScene().buildIndex);
+        Application.Quit();
     }
 
     void Reprendre()

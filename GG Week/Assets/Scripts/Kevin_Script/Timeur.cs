@@ -8,7 +8,9 @@ public class Timeur : MonoBehaviour
 
     public float currentTime = 0;
     public float startTime = 10;
-    public GameObject blackScreeen;
+    public GameObject blackScreeenDead;
+    public GameObject blackScreen;
+    public GameObject pause;
 
 
     [SerializeField] Text compteur;
@@ -16,7 +18,9 @@ public class Timeur : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        blackScreeen.SetActive(false);
+
+        blackScreen.SetActive(true);
+        blackScreeenDead.SetActive(false);
         currentTime = startTime;
 
     }
@@ -29,8 +33,10 @@ public class Timeur : MonoBehaviour
 
         if(currentTime <= 0)
         {
+
             currentTime = 0;
-            blackScreeen.SetActive(true);
+            blackScreeenDead.SetActive(true);
+            pause.SetActive(false);
 
         }
 
