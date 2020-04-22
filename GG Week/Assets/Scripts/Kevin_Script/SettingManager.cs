@@ -9,8 +9,7 @@ public class SettingManager : MonoBehaviour
     public Toggle fullscreenToggle;
     public Dropdown resolutionDropdown;
     public Slider musiqueSlider;
-    public Slider sensiMouseSlider;
-
+    
 
     public Resolution[] resolution;
     public AudioSource musicSource;
@@ -24,9 +23,6 @@ public class SettingManager : MonoBehaviour
         fullscreenToggle.onValueChanged.AddListener(delegate { OnFullscreenToggle(); });
         resolutionDropdown.onValueChanged.AddListener(delegate { OnResolutionChange(); });
         musiqueSlider.onValueChanged.AddListener(delegate { OnMusiqueVolumeChange(); });
-        //sensiMouseSlider.onValueChanged.AddListener(delegate { OnsensiMouseChange(); });
-        //applyButton.onClick.AddListener(delegate { OnApplyButtonClick(); });
-       // sensiMouseSlider.onValueChanged.AddListener(delegate { OnSensiMouseChange(); });
 
 
         resolution = Screen.resolutions;

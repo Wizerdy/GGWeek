@@ -9,7 +9,7 @@ public class Menu : MonoBehaviour
 
     void BackMenu()
     {
-        SceneManager.LoadScene("MenueP", LoadSceneMode.Single);
+        SceneManager.LoadScene("MenuP", LoadSceneMode.Single);
     }
 
     void Quitter()
@@ -23,5 +23,14 @@ public class Menu : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    void First_Scene()
+    {
+        SceneManager.LoadScene("", LoadSceneMode.Single);
+    }
+
+    void Credit()
+    {
+        SceneManager.LoadScene("Credit", LoadSceneMode.Single);
+    }
 
 }

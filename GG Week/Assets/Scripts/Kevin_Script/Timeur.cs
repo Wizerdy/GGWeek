@@ -11,25 +11,37 @@ public class Timeur : MonoBehaviour
     public GameObject blackScreeenDead;
     public GameObject blackScreen;
     public GameObject pause;
-
+    public GameObject textmanager;
+    private bool dialogue = false;
 
     [SerializeField] Text compteur;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        textmanager.SetActive(false);
         blackScreen.SetActive(true);
         blackScreeenDead.SetActive(false);
         currentTime = startTime;
 
     }
 
+
     // Update is called once per frame
     void Update()
     {
         currentTime -= 1 * Time.deltaTime;
         compteur.text = currentTime.ToString("0");
+
+        if (dialogue)
+        {
+            textmanager.SetActive(true);
+        }
+
+        if (currentTime <= 60 )
+        {
+            dialogue = true;
+        }
 
         if(currentTime <= 0)
         {

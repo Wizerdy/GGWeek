@@ -28,9 +28,9 @@ public class Dialogue : MonoBehaviour
     private float Phrase_lgt;
 
 
-
     void Start()
     {
+
         if (TextFile != null)  // Si le fichier texte donné n'est pas nul, pour eviter les bugs.
         {
             TextLines = (TextFile.text.Split('\n'));  // on sépare par les sauts de lignes, '\n' dans les fichier textes
@@ -75,6 +75,7 @@ public class Dialogue : MonoBehaviour
         // Pour faire defiller le texte.
         if (timer > Phrase_lgt / 19.2f && defilement && !IsTyping)  // Tu utilises la longueur de la ligne 'Phrase_lgt' divisé par un coefficient de ton choix ( ici 19.2 ) pour que la phrase reste à l'écran pour un temps donné
         {
+
             timer = 0;
             CurrentLine += 1;
             TheText.text = "";
@@ -82,9 +83,9 @@ public class Dialogue : MonoBehaviour
 
             if (CurrentLine > EndLine) // Ferma la box de dialogue quand tout est fini.
             {
+                IsTyping = false;
                 TextBox.SetActive(false);
                 this.gameObject.SetActive(false);
-              //GameManager.instance.ReloadLevel;
             }
         }
         else

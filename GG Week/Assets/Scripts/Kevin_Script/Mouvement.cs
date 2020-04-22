@@ -5,7 +5,6 @@ using UnityEngine;
 public class Mouvement : MonoBehaviour
 {
     public float normalSpeed = 12f;
-    public float slideSpeed = 25;
 
     private float speed;
     private Rigidbody _rb;
@@ -58,9 +57,9 @@ public class Mouvement : MonoBehaviour
         }
     }
 
+    
     private bool IsGrounded()
     {
-
         return Physics.CheckCapsule(colli.bounds.center, new Vector3(colli.bounds.center.x, colli.bounds.min.y, colli.bounds.center.z), colli.radius * 0.9f, groundMask);
     }
 
