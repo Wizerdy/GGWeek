@@ -32,6 +32,12 @@ public class Timeur : MonoBehaviour
     {
         currentTime -= 1 * Time.deltaTime;
         compteur.text = currentTime.ToString("0");
+        int second = (int)(currentTime % 60);
+        int minute = (int)(currentTime / 60);
+
+        string timerString = string.Format("{0:0}:{1:00}",minute,second);
+
+        compteur.text = timerString;
 
         if (dialogue)
         {
