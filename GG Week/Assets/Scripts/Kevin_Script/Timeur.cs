@@ -44,7 +44,7 @@ public class Timeur : MonoBehaviour
             textmanager.SetActive(true);
         }
 
-        if (currentTime <= 60 )
+        if (currentTime <= 65 )
         {
             dialogue = true;
         }

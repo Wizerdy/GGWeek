@@ -9,6 +9,7 @@ public class Quitter : MonoBehaviour
     void Update()
     {
         temps -= Time.deltaTime;
+        Time.timeScale = 1;
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
