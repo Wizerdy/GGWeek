@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: dfca4d15f6f4def439ceb620ac5ecedf
+guid: 0621162355706654884363c303676b3b
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable:
@@ -15,28 +15,28 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: M_livre1&2
-    second: {fileID: 2100000, guid: 46c339a44fea7594b87e9c82e07b4bd1, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_livre3&4
-    second: {fileID: 2100000, guid: c057a743d4fe1e341953591aced43f54, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_livre5&6
-    second: {fileID: 2100000, guid: 46d29bbfbc6986e44a65793c0e5f869b, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: M_placard
+      name: Material #70
     second: {fileID: 2100000, guid: 76011f68287499543bad10494ca4d6c0, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: M_porte
+      name: Material #71
     second: {fileID: 2100000, guid: 52eeb5ba80e32824cb4955b2d0b961ea, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material #72
+    second: {fileID: 2100000, guid: 46c339a44fea7594b87e9c82e07b4bd1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material #73
+    second: {fileID: 2100000, guid: c057a743d4fe1e341953591aced43f54, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material #74
+    second: {fileID: 2100000, guid: 46d29bbfbc6986e44a65793c0e5f869b, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
