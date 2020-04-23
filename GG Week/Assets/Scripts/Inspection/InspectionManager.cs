@@ -46,6 +46,12 @@ public class InspectionManager : MonoBehaviour
         {
             inspectParent.rotation = Quaternion.identity;
             GameObject insta = Instantiate(objectToInspect, inspectParent);
+
+            if(insta.GetComponent<RotationInHand>() != null)
+            {
+                insta.transform.eulerAngles = insta.GetComponent<RotationInHand>().rotation;
+            }
+
             insta.transform.localPosition = new Vector3(0, 0, 0);
             insta.layer = inspectParent.gameObject.layer;
 
@@ -53,6 +59,7 @@ public class InspectionManager : MonoBehaviour
             {
                 insta.GetComponent<Rigidbody>().isKinematic = true;
             }
+            MouseLook.instance.ShowHUD(false);
 
         } else
         {
@@ -63,6 +70,7 @@ public class InspectionManager : MonoBehaviour
                     Destroy(inspectParent.GetChild(i).gameObject);
                 }
             }
+            MouseLook.instance.ShowHUD(true);
         }
 
     }

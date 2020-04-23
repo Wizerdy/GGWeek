@@ -47,4 +47,11 @@ public class StepsManager : MonoBehaviour
         }
     }
 
+    public void ResetList(int index)
+    {
+        for (int i = 0; i < steps[index].steps.Count; i++)
+        {
+            steps[index].steps[i].Reset();
+        }
+    }
 }

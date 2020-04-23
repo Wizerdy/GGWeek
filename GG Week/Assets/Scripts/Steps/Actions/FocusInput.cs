@@ -9,4 +9,9 @@ public class FocusInput : MonoBehaviour
     {
         gameObject.GetComponent<InputField>().ActivateInputField();
     }
+
+    public void AddText(string text)
+    {
+        gameObject.GetComponent<InputField>().text += text;
+    }
 }

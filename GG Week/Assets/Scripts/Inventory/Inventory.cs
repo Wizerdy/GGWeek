@@ -45,6 +45,11 @@ public class Inventory : MonoBehaviour
         obj.transform.parent = hand.transform;
         obj.transform.localRotation = Quaternion.identity;
 
+        if (obj.GetComponent<RotationInHand>() != null)
+        {
+            obj.transform.eulerAngles = obj.GetComponent<RotationInHand>().rotation;
+        }
+
         obj.GetComponentInChildren<Collider>().enabled = false;
 
         if(obj.GetComponentInChildren<Rigidbody>() != null)

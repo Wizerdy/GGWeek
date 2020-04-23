@@ -22,11 +22,15 @@ public class MouseLook : MonoBehaviour
     [SerializeField] private float cameraMovementSpeed = 10f;
     [SerializeField] private float cameraMagnetRadius = 0.2f;
 
+    [Header("HUD")]
+    [SerializeField] private GameObject HUD;
+
     [HideInInspector] public GameObject objectLookingAt;
     private RaycastHit hit;
 
     private Vector3 basePos;
     private Quaternion baseRot;
+    private float baseFov;
 
     private void Awake()
     {
@@ -56,6 +60,7 @@ public class MouseLook : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.Escape))
             {
                 //StartCoroutine(MoveCamera(baseTransform.localPosition, baseTransform.rotation));
+                HUD.SetActive(true);
                 Inventory.instance.ShowHand(true);
                 StopAllCoroutines();
                 StartCoroutine("ComeBack");
@@ -79,7 +84,7 @@ public class MouseLook : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hit, rayDistance))
+        if (Physics.Raycast(ray, out hit, rayDistance) && hit.collider.gameObject != null)
         {
             Debug.DrawLine(ray.origin, hit.point, Color.red);
 
@@ -90,17 +95,21 @@ public class MouseLook : MonoBehaviour
                 case "Interactable":
                     if (Input.GetKeyDown(KeyCode.E))
                     {
-                        if (objectLookingAt.GetComponentInChildren<Camera>() != null)
+                        if (objectLookingAt.GetComponentInChildren<Camera>() != null && objectLookingAt.GetComponentInChildren<Camera>().enabled)
                         {
+                            HUD.SetActive(false);
                             visionLock = true;
                             Inventory.instance.ShowHand(false);
                             BaseTransform(transform);
+                            baseFov = GetComponent<Camera>().fieldOfView;
 
                             if(objectLookingAt.GetComponentInChildren<InputField>() != null)
                                 objectLookingAt.GetComponentInChildren<InputField>().ActivateInputField();
 
-                            StartCoroutine(MoveCamera(objectLookingAt.GetComponentInChildren<Camera>().transform));
+                            StartCoroutine(MoveCamera(objectLookingAt.GetComponentInChildren<Camera>().transform, objectLookingAt.GetComponentInChildren<Camera>().fieldOfView));
                         }
+
+                        
                     }
                     break;
                 case "Prop":
@@ -111,10 +120,16 @@ public class MouseLook : MonoBehaviour
                     }
                     break;
             }
+
+            if (Input.GetKeyDown(KeyCode.E) && objectLookingAt != null && objectLookingAt.GetComponent<Action>() != null)
+            {
+                objectLookingAt.GetComponent<Action>().Act();
+            }
         }
         else
         {
             Debug.DrawLine(ray.origin, ray.origin + ray.direction * rayDistance, Color.green);
+            objectLookingAt = null;
         }
     }
 
@@ -131,6 +146,11 @@ public class MouseLook : MonoBehaviour
         }
     }
 
+    public void ShowHUD(bool state)
+    {
+        HUD.SetActive(state);
+    }
+
     private void BaseTransform(Transform transform)
     {
         basePos = transform.localPosition;
@@ -138,42 +158,47 @@ public class MouseLook : MonoBehaviour
     }
 
 
-    IEnumerator MoveCamera(Vector3 pos, Quaternion rot)
+    IEnumerator MoveCamera(Vector3 pos, Quaternion rot, float fov)
     {
-        Debug.Log("Processing to " + pos + " from " + transform.position);
+        //Debug.Log("Processing to " + pos + " from " + transform.position);
         while (transform.position != pos)
         {
             yield return new WaitForSeconds(0.01f);
             transform.position = Vector3.Lerp(transform.position, pos, cameraMovementSpeed * Time.deltaTime);
             transform.rotation = Quaternion.Lerp(transform.rotation, rot, cameraMovementSpeed * Time.deltaTime);
+            GetComponent<Camera>().fieldOfView = Mathf.Lerp(GetComponent<Camera>().fieldOfView, fov, cameraMovementSpeed * Time.deltaTime);
 
             if ((transform.position - pos).magnitude < cameraMagnetRadius)
             {
                 transform.position = pos;
                 transform.rotation = rot;
+                GetComponent<Camera>().fieldOfView = fov;
             }
         }
     }
 
-    IEnumerator MoveCamera(Transform target)
+    IEnumerator MoveCamera(Transform target, float fov)
     {
         yield return new WaitForSeconds(0.01f);
-        StartCoroutine(MoveCamera(target.position, target.rotation));
+        StartCoroutine(MoveCamera(target.position, target.rotation, fov));
     }
 
     IEnumerator ComeBack()
     {
-        Debug.Log("Processing to " + basePos + " from " + transform.localPosition);
+        //Debug.Log("Processing to " + basePos + " from " + transform.localPosition);
         while (transform.localPosition != basePos)
         {
             yield return new WaitForSeconds(0.01f);
             transform.localPosition = Vector3.Lerp(transform.localPosition, basePos, cameraMovementSpeed * Time.deltaTime);
             transform.localRotation = Quaternion.Lerp(transform.localRotation, baseRot, cameraMovementSpeed * Time.deltaTime);
+            GetComponent<Camera>().fieldOfView = Mathf.Lerp(GetComponent<Camera>().fieldOfView, baseFov, cameraMovementSpeed * Time.deltaTime);
 
-            if((transform.localPosition - basePos).magnitude < cameraMagnetRadius)
+
+            if ((transform.localPosition - basePos).magnitude < cameraMagnetRadius)
             {
                 transform.localPosition = basePos;
                 transform.localRotation = baseRot;
+                GetComponent<Camera>().fieldOfView = baseFov;
             }
         }
         visionLock = false;

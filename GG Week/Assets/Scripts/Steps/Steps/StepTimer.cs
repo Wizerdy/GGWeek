@@ -10,7 +10,6 @@ public class StepTimer : Step
     private void OnEnable()
     {
         StartCoroutine("StartTimer");
-        Debug.Log("Explosion imminente");
     }
 
     public override bool Check()
