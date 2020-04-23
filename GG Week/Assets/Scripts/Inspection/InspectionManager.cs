@@ -20,9 +20,11 @@ public class InspectionManager : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.A))
+        if(Input.GetKeyDown(KeyCode.R) && Inventory.instance.objectInHand != null)
         {
+            objectToInspect = Inventory.instance.objectInHand;
             ToggleInspectRender();
+            MouseLook.instance.ToggleLockMouse();
         }
 
         if(IsInspectRenderActive())

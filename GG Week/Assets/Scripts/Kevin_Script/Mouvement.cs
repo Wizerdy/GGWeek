@@ -28,7 +28,7 @@ public class Mouvement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.timeScale != 0)
+        if (Time.timeScale != 0 && !MouseLook.instance.visionLock)
         {
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
@@ -50,6 +50,11 @@ public class Mouvement : MonoBehaviour
             }
             move = Vector3.ClampMagnitude(move, 1);
             _rb.MovePosition(transform.position + (move * speed * Time.deltaTime));
+
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                Inventory.instance.Drop();
+            }
         }
         else
         {
