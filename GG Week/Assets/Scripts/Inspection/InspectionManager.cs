@@ -20,22 +20,27 @@ public class InspectionManager : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.R) && Inventory.instance.objectInHand != null)
+        if(!IsInspectRenderActive() && Input.GetKeyDown(KeyCode.R) && Inventory.instance.objectInHand != null)
         {
             objectToInspect = Inventory.instance.objectInHand;
             ToggleInspectRender();
-            MouseLook.instance.ToggleLockMouse();
         }
 
         if(IsInspectRenderActive())
         {
             ObjectRotation();
+
+            if(Input.GetButtonDown("Cancel"))
+            {
+                ToggleInspectRender();
+            }
         }
     }
 
     public void ToggleInspectRender()
     {
         SetInspectRender(!IsInspectRenderActive());
+        MouseLook.instance.ToggleLockMouse();
     }
 
     public void SetInspectRender(bool state)
@@ -54,6 +59,7 @@ public class InspectionManager : MonoBehaviour
 
             insta.transform.localPosition = new Vector3(0, 0, 0);
             insta.layer = inspectParent.gameObject.layer;
+            SetLayerRecursively(insta, insta.layer);
 
             if(insta.GetComponent<Rigidbody>() != null)
             {
@@ -61,12 +67,19 @@ public class InspectionManager : MonoBehaviour
             }
             MouseLook.instance.ShowHUD(false);
 
+            if(objectToInspect.GetComponent<Action>() != null)
+            {
+                objectToInspect.GetComponent<Action>().Act();
+            }
         } else
         {
             if(HasObjectInspected())
             {
                 for (int i = 0; i < inspectParent.childCount; i++)
                 {
+                    if (inspectParent.GetChild(i).childCount > 0 && inspectParent.GetChild(i).GetChild(0).GetComponent<Action>() != null) {
+                        inspectParent.GetChild(i).GetChild(0).GetComponent<Action>().Act();
+                    }
                     Destroy(inspectParent.GetChild(i).gameObject);
                 }
             }
@@ -103,6 +116,25 @@ public class InspectionManager : MonoBehaviour
             Vector3 axis = Quaternion.AngleAxis(-90f, Vector3.forward) * delta;
 
             inspectParent.rotation = Quaternion.AngleAxis(delta.magnitude * 0.1f, axis) * inspectParent.rotation;
+        }
+    }
+
+    void SetLayerRecursively(GameObject obj, int newLayer)
+    {
+        if (null == obj)
+        {
+            return;
+        }
+
+        obj.layer = newLayer;
+
+        foreach (Transform child in obj.transform)
+        {
+            if (null == child)
+            {
+                continue;
+            }
+            SetLayerRecursively(child.gameObject, newLayer);
         }
     }
 }

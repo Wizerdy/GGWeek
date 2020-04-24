@@ -19,7 +19,7 @@ public class InputManager : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Return))
         {
-            if(inputField.text == password)
+            if(inputField.text.ToLower() == password.ToLower())
             {
                 callback.Invoke();
             }

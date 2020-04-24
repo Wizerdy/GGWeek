@@ -31,6 +31,7 @@ public class MouseLook : MonoBehaviour
     private Vector3 basePos;
     private Quaternion baseRot;
     private float baseFov;
+    private bool observing = false;
 
     private void Awake()
     {
@@ -57,13 +58,10 @@ public class MouseLook : MonoBehaviour
             LineVision();
         } else
         {
-            if(Input.GetKeyDown(KeyCode.Escape))
+            if(observing && Input.GetKeyDown(KeyCode.Escape))
             {
                 //StartCoroutine(MoveCamera(baseTransform.localPosition, baseTransform.rotation));
-                HUD.SetActive(true);
-                Inventory.instance.ShowHand(true);
-                StopAllCoroutines();
-                StartCoroutine("ComeBack");
+                CameraComeBack();
             }
         }
     }
@@ -89,7 +87,12 @@ public class MouseLook : MonoBehaviour
             Debug.DrawLine(ray.origin, hit.point, Color.red);
 
             objectLookingAt = hit.collider.gameObject;
+            //Debug.Log(objectLookingAt);
 
+            if (Input.GetKeyDown(KeyCode.E) && objectLookingAt != null && objectLookingAt.GetComponent<Action>() != null)
+            {
+                objectLookingAt.GetComponent<Action>().Act();
+            }
             switch (hit.collider.gameObject.tag)
             {
                 case "Interactable":
@@ -97,6 +100,8 @@ public class MouseLook : MonoBehaviour
                     {
                         if (objectLookingAt.GetComponentInChildren<Camera>() != null && objectLookingAt.GetComponentInChildren<Camera>().enabled)
                         {
+                            observing = true;
+
                             HUD.SetActive(false);
                             visionLock = true;
                             Inventory.instance.ShowHand(false);
@@ -116,15 +121,11 @@ public class MouseLook : MonoBehaviour
                     if(Input.GetKeyDown(KeyCode.E))
                     {
                         Inventory.instance.PickUp(objectLookingAt);
-                        objectLookingAt = null;
                     }
                     break;
             }
 
-            if (Input.GetKeyDown(KeyCode.E) && objectLookingAt != null && objectLookingAt.GetComponent<Action>() != null)
-            {
-                objectLookingAt.GetComponent<Action>().Act();
-            }
+            //Debug.Log((Input.GetKeyDown(KeyCode.E)) + " // " + (objectLookingAt));
         }
         else
         {
@@ -144,6 +145,15 @@ public class MouseLook : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             visionLock = false;
         }
+    }
+
+    public void CameraComeBack()
+    {
+        HUD.SetActive(true);
+        Inventory.instance.ShowHand(true);
+        StopAllCoroutines();
+        StartCoroutine("ComeBack");
+        observing = false;
     }
 
     public void ShowHUD(bool state)

@@ -20,17 +20,20 @@ public class Inventory : MonoBehaviour
 
     public void Drop()
     {
-        objectInHand.transform.parent = propParent;
-        objectInHand.transform.position = drop.transform.position;
-
-        objectInHand.GetComponentInChildren<Collider>().enabled = true;
-
-        if (objectInHand.GetComponentInChildren<Rigidbody>() != null)
+        if (objectInHand != null)
         {
-            objectInHand.GetComponentInChildren<Rigidbody>().isKinematic = false;
-        }
+            objectInHand.transform.parent = propParent;
+            objectInHand.transform.position = drop.transform.position;
 
-        objectInHand = null;
+            objectInHand.GetComponentInChildren<Collider>().enabled = true;
+
+            if (objectInHand.GetComponentInChildren<Rigidbody>() != null)
+            {
+                objectInHand.GetComponentInChildren<Rigidbody>().isKinematic = false;
+            }
+
+            objectInHand = null;
+        }
     }
 
     public void PickUp(GameObject obj)
@@ -56,6 +59,11 @@ public class Inventory : MonoBehaviour
         {
             obj.GetComponentInChildren<Rigidbody>().isKinematic = true;
         }
+    }
+
+    public void DestroyHand()
+    {
+        Destroy(objectInHand);
     }
 
     public void ToggleHand()

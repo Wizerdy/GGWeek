@@ -7,6 +7,8 @@ using System;
 
 public class SoundManager : MonoBehaviour
 {
+    public static SoundManager instance;
+
     public Sound[] son;
 
     void Start()
@@ -16,6 +18,8 @@ public class SoundManager : MonoBehaviour
 
     void Awake()
     {
+        instance = this;
+
         foreach(Sound x in son)
         {
             x.source = gameObject.AddComponent<AudioSource>();
@@ -28,7 +32,10 @@ public class SoundManager : MonoBehaviour
     public void Play(string name)
     {
         Sound x = Array.Find(son, sound => sound.name == name);
-        x.source.Play();
+        if (x != null)
+        {
+            x.source.Play();
+        }
     }
 
     //FindObjectOfType<SoundManager>().Play("");

@@ -20,6 +20,10 @@ public class DigicodeController : MonoBehaviour
         if(input == password)
         {
             callbacks.Invoke();
+            SoundManager.instance.Play("Correct");
+        } else
+        {
+            SoundManager.instance.Play("Wrong");
         }
 
         input = "";
