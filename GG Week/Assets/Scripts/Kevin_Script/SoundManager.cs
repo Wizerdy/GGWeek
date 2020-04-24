@@ -1,30 +1,35 @@
-﻿using System.Collections;
+﻿using UnityEngine.Audio;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+
 
 public class SoundManager : MonoBehaviour
 {
-    public AudioClip[] son;
-    public int number;
+    public Sound[] son;
 
-     /*public static void playSound()
-     {
-         GameObject soundGameObject = new GameObject("son");
-         AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
-
-     }*/  
-
-    void Update()
+    void Start()
     {
+        Play("main");
+    }
 
-        int j = number;
-        for (int i = 0; i < son.Length; i++)
+    void Awake()
+    {
+        foreach(Sound x in son)
         {
-            if (i == j)
-            {
-                //son[i];
-            }
+            x.source = gameObject.AddComponent<AudioSource>();
+            x.source.clip = x.clip;
+            x.source.volume = x.volume;
+            x.source.loop = x.loop;
         }
     }
 
+    public void Play(string name)
+    {
+        Sound x = Array.Find(son, sound => sound.name == name);
+        x.source.Play();
+    }
+
+    //FindObjectOfType<SoundManager>().Play("");
 }
