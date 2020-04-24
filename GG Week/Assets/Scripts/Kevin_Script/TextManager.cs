@@ -8,7 +8,7 @@ public class TextManager : MonoBehaviour
 
     public GameObject[] dialogueBox;
     public GameObject player;
-    public int number = 2;
+    public int number;
 
     void Start()
     {

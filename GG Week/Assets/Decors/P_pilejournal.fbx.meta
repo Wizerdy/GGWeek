@@ -3,7 +3,27 @@ guid: 1d46d278b0548db43af9c036e4944262
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Journaux
+    second: {fileID: 2100000, guid: ba510e6a987d722428ae820122b77e60, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.003
+    second: {fileID: 2100000, guid: 0311d9299273f4b45bc6c929c2a8e72c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.004
+    second: {fileID: 2100000, guid: 0311d9299273f4b45bc6c929c2a8e72c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Papier
+    second: {fileID: 2100000, guid: 3ced18dbb72cede48945102499b888c5, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

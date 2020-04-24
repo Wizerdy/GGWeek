@@ -3565,7 +3565,7 @@ GameObject:
   - component: {fileID: 1548625551}
   - component: {fileID: 1548625550}
   m_Layer: 0
-  m_Name: TextManager
+  m_Name: DialogueManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3585,10 +3585,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueBox:
   - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1232147665}
   - {fileID: 0}
   player: {fileID: 0}
-  number: 2
+  number: 0
 --- !u!4 &1548625551
 Transform:
   m_ObjectHideFlags: 0
