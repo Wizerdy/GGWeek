@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Timeur : MonoBehaviour
 {
@@ -67,4 +68,10 @@ public class Timeur : MonoBehaviour
     //    }
 
     //}
+
+    public void LoadScene(string sceneName)
+    {
+        Cursor.lockState = CursorLockMode.None;
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+    }
 }
