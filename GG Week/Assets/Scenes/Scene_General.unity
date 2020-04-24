@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731713, g: 0.13414736, b: 0.12107852, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -13564,7 +13564,7 @@ MonoBehaviour:
   blackScreeenDead: {fileID: 3211020461658994136}
   blackScreen: {fileID: 3211020460809679770}
   pause: {fileID: 3211020460520130309}
-  textmanager: {fileID: 3211020462031028101}
+  textmanager: {fileID: 0}
   compteur: {fileID: 0}
 --- !u!114 &3211020462020655328
 MonoBehaviour:
@@ -13711,7 +13711,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3211020462031028102
 Transform:
   m_ObjectHideFlags: 0
@@ -13745,7 +13745,7 @@ MonoBehaviour:
   TextLines: []
   CurrentLine: 0
   EndLine: 0
-  TypeSpeed: 0.15
+  TypeSpeed: 0.07
   defilement: 1
   timer: 0
 --- !u!1 &3211020462031538664

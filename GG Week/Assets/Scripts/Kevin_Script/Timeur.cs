@@ -20,7 +20,7 @@ public class Timeur : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        textmanager.SetActive(false);
+        //textmanager.SetActive(false);
         blackScreen.SetActive(true);
         blackScreeenDead.SetActive(false);
         //currentTime = startTime;

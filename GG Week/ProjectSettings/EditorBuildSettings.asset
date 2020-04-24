@@ -12,9 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Scene_General.unity
     guid: 676286a876a35a8499b928f85ea11574
   - enabled: 1
-    path: Assets/Scenes/Credit.unity
-    guid: 57a1516d960b09542ae8abc6467296af
-  - enabled: 1
     path: Assets/Scenes/Victory.unity
     guid: d0832ec4054437e4ba78b2d5529afb81
+  - enabled: 1
+    path: Assets/Scenes/Credit.unity
+    guid: 57a1516d960b09542ae8abc6467296af
   m_configObjects: {}
