@@ -32,7 +32,7 @@ public class MenuPause : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             Cursor.visible = false;
             //  Debug.Log("touche P presser");
