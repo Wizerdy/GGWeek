@@ -25,7 +25,7 @@ public class Menu : MonoBehaviour
 
     void First_Scene()
     {
-        SceneManager.LoadScene("", LoadSceneMode.Single);
+        SceneManager.LoadScene("Scene_General", LoadSceneMode.Single);
     }
 
     void Credit()
